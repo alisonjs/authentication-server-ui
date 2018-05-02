@@ -10,12 +10,15 @@ import { RoutingModule} from "./app.router";
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
+import { SingInComponent } from './users/sing-in/sing-in.component';
+import {UsersService} from './users/users-service.service'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    SingInComponent
   ],
   imports: [
     BrowserModule, RoutingModule,
@@ -32,7 +35,7 @@ import { UserComponent } from './user/user.component';
     PasswordModule
 
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

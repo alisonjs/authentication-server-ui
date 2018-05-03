@@ -9,11 +9,17 @@ import {PasswordModule} from 'primeng/password';
 import { RoutingModule} from "./app.router";
 
 import { AppComponent } from './app.component';
+import { SignInComponent } from './users/sign-in/sign-in.component';
+import { DocumentsComponent } from './documents/documents/documents.component';
+import { UsersService } from './users/users.service';
+import {DocumentsService} from './documents/documents.service'
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    SignInComponent,
+    DocumentsComponent,
   ],
   imports: [
     BrowserModule, RoutingModule,
@@ -30,7 +36,7 @@ import { AppComponent } from './app.component';
     PasswordModule
 
   ],
-  providers: [],
+  providers: [UsersService, DocumentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

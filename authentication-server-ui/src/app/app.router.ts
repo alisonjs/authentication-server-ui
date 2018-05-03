@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router'
-import { UserComponent } from './user/user.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
     //home
     {
-        path: 'user',
-        component: UserComponent
+        path: '',
+        component: AppComponent
     }
     ];
 

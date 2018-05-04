@@ -1,8 +1,9 @@
-  <div class="ui-g ui-fluid">
+<form #frm="ngForm" (ngSubmit)="login(frm)">
+<div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-3">
         <div class="ui-inputgroup">
             <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-            <input type="text" pInputText placeholder="Username" ngModel [required]="true" />         
+            <input type="text" pInputText name="login" placeholder="Username" ngModel [required]="true" />         
         </div>
     </div>
   </div>
@@ -10,12 +11,14 @@
     <div class="ui-g-12 ui-md-3">
       <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
-          <input type="password" pPassword placeholder="Password" ngModel [required]="true" />      
+          <input type="password" name="password" pPassword placeholder="Password" ngModel [required]="true" />      
       </div>
     </div>
   </div>
   <div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-3">
-      <p-button label="Sign in" type="submit" ></p-button>
+      <p-button label="Sign in" type="submit" [disabled]="frm.invalid"></p-button>
+      <p-button label="Register" (click)="register(frm)" styleClass="ui-button-secondary" [disabled]="frm.invalid" ></p-button>
     </div>
   </div>
+</form>

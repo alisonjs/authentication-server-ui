@@ -12,7 +12,8 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './users/sign-in/sign-in.component';
 import { DocumentsComponent } from './documents/documents/documents.component';
 import { UsersService } from './users/users.service';
-import {DocumentsService} from './documents/documents.service'
+import {DocumentsService} from './documents/documents.service';
+import { UsersComponent } from './users/users/users.component'
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {DocumentsService} from './documents/documents.service'
     AppComponent,
     SignInComponent,
     DocumentsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule, RoutingModule,

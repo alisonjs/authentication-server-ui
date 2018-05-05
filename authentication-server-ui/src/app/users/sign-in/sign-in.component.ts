@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
+import {Message} from 'primeng/components/common/api';
+import {MessageService} from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
+  msgs: Message[] = [];
   constructor(private userService:UsersService, private router:Router) { }
 
   ngOnInit() {
@@ -17,13 +19,23 @@ export class SignInComponent implements OnInit {
 
   register(form:FormControl){
     this.userService.register(form.value).subscribe(()=> {
-      this.router.navigate(['users/sign_in']);
-    });
+    this.msgs = [];
+    this.msgs.push({severity:'success', summary:'', detail:"User created"});
+    form.reset();
+    },
+  error => {
+    this.msgs = [];
+    this.msgs.push({severity:'error', summary:'Error Message', detail:error.error.message});
+  });
   }
 
   login(form:FormControl){
     this.userService.login(form.value).subscribe(()=> {
       this.router.navigate(['documents']);
-    });
+    },
+  error=>{
+    this.msgs = [];
+    this.msgs.push({severity:'error', summary:'Error Message', detail:error.error.message});
+  });
   }
 }

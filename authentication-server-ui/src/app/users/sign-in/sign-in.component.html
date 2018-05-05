@@ -1,24 +1,33 @@
+<p-messages [(value)]="msgs"></p-messages>
 <form #frm="ngForm" (ngSubmit)="login(frm)">
-<div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-3">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-            <input type="text" pInputText name="login" placeholder="Username" ngModel [required]="true" />         
+  <div class="ui-g ui-fluid" >
+    <div class="ui-g-12 ui-md-6 ui-lg-4 ui-md-offset-3 ui-lg-offset-4">
+    <p-card styleClass="ui-card-shadow" title="Sign in">
+      <div class="ui-g ui-fluid" >
+        <div class="ui-g-12">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input type="text" pInputText name="login" placeholder="Username" ngModel [required]="true" />         
+            </div>
         </div>
-    </div>
-  </div>
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-3">
-      <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
-          <input type="password" name="password" pPassword placeholder="Password" ngModel [required]="true" />      
       </div>
-    </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+          <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+              <input type="password" name="password" pPassword placeholder="Password" ngModel [required]="true" />      
+          </div>
+        </div>
+      </div>
+      <p-footer>
+          <div class="ui-g ui-fluid">
+              <div class="ui-g-12 ">
+                <p-button label="Sign in" type="submit" [disabled]="frm.invalid"></p-button>
+                <p-button label="Register" (click)="register(frm)" styleClass="ui-button-secondary" [disabled]="frm.invalid" ></p-button>
+              </div>
+            </div>
+      </p-footer>    
+  </p-card>
   </div>
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-3">
-      <p-button label="Sign in" type="submit" [disabled]="frm.invalid"></p-button>
-      <p-button label="Register" (click)="register(frm)" styleClass="ui-button-secondary" [disabled]="frm.invalid" ></p-button>
-    </div>
-  </div>
+</div>
 </form>

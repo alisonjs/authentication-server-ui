@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class UsersService {
   users_url:string = "http://localhost:8080";
+  private current_user = {};
 
   constructor(private http:HttpClient) { }
 
@@ -17,5 +18,12 @@ export class UsersService {
 
   list(){
     return this.http.get<any[]>(this.users_url+"/users");
+  }
+
+  setCurrentUser(user:any){
+    this.current_user = user;
+  }
+  getCurrentUser():any{
+    return this.current_user;
   }
 }

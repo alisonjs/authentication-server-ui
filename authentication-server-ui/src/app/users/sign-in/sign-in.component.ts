@@ -30,7 +30,8 @@ export class SignInComponent implements OnInit {
   }
 
   login(form:FormControl){
-    this.userService.login(form.value).subscribe(()=> {
+    this.userService.login(form.value).subscribe((data)=> {
+      this.userService.setCurrentUser(data);
       this.router.navigate(['documents']);
     },
   error=>{

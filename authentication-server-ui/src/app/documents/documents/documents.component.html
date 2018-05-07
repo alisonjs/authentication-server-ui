@@ -1,3 +1,28 @@
-<p>
-  documents works!
-</p>
+<form #frm="ngForm" (ngSubmit)="save(frm)">
+  <div class="ui-g">
+      
+      <div class="ui-g-7 ui-fluid">
+          <label>Title</label>
+          <input pInputText name="name" ngModel [required]="true">
+      </div>
+      <div class="ui-g-7 ui-fluid">
+        <label>Description</label>
+        <textarea pInputTextarea name="description" ngModel [required]="true"></textarea>
+    </div>
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Save" [disabled]="frm.invalid"></button>
+      </div>
+  </div>
+</form>
+<div class="ui-g">
+    <div class="ui-g-12">
+        <h1> Documents </h1>
+      </div>
+  <div class="ui-g-12">
+    <p-dataTable [value]="documents">
+      <p-column field="document.name" header="Title"></p-column>
+      <p-column field="document.description" header="Description"></p-column>
+      <p-column field="role" header="Role"></p-column>
+    </p-dataTable>
+  </div>
+</div>

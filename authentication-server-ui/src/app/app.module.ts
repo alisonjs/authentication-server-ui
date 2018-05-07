@@ -8,6 +8,7 @@ import {PasswordModule} from 'primeng/password';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {CardModule} from 'primeng/card';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { RoutingModule} from "./app.router";
 
@@ -41,7 +42,8 @@ import { UsersComponent } from './users/users/users.component'
     PasswordModule,
     MessagesModule,
     MessageModule,
-    CardModule
+    CardModule,
+    InputTextareaModule
 
   ],
   providers: [UsersService, DocumentsService],

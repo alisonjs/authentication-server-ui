@@ -9,6 +9,10 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {CardModule} from 'primeng/card';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DropdownModule} from 'primeng/dropdown';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {SelectItem} from 'primeng/api';
+
 
 import { RoutingModule} from "./app.router";
 
@@ -25,7 +29,7 @@ import { UsersComponent } from './users/users/users.component'
     AppComponent,
     SignInComponent,
     DocumentsComponent,
-    UsersComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule, RoutingModule,
@@ -43,7 +47,9 @@ import { UsersComponent } from './users/users/users.component'
     MessagesModule,
     MessageModule,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DropdownModule,
+    AutoCompleteModule
 
   ],
   providers: [UsersService, DocumentsService],

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentsService } from '../documents.service';
 import { FormControl } from '@angular/forms';
+import { UsersService } from '../../users/users.service';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-documents',
@@ -9,8 +11,15 @@ import { FormControl } from '@angular/forms';
 })
 export class DocumentsComponent implements OnInit {
   documents = [];
+  users = [];
   msgs = [];
-  constructor(private documentsService:DocumentsService) { }
+  roles:SelectItem[];
+  login;
+  role;
+  access = [];
+  constructor(private documentsService:DocumentsService, private usersService:UsersService) {
+    this.roles = [ {label:'WRITE', value:'W'}, {label:'READ', value:'R'}]
+   }
 
   ngOnInit() {
     this.list();
@@ -36,6 +45,11 @@ export class DocumentsComponent implements OnInit {
     error=>{
       this.msgs = [];
       this.msgs.push({severity:'error', summary:'Error Message', detail:error.error.message});
+    });
+  }
+  search(event){
+    this.usersService.get(event.query).subscribe((data)=>{
+      this.users = data;
     });
   }
 }

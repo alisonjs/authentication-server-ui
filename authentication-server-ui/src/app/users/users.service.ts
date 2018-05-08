@@ -19,7 +19,12 @@ export class UsersService {
   list(){
     return this.http.get<any[]>(this.users_url+"/users");
   }
-
+  get(query:string){
+    return this.http.get<any[]>(this.users_url+"/users/"+query);
+  }
+  getRoles(){
+    return this.http.get<any[]>(this.users_url+"/roles");
+  }
   setCurrentUser(user:any){
     this.current_user = user;
   }

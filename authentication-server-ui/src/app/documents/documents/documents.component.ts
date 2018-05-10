@@ -9,11 +9,17 @@ import {SelectItem} from 'primeng/api';
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.css']
 })
+
 export class DocumentsComponent implements OnInit {
   documents = [];
   users = [];
   msgs = [];
-  constructor(private documentsService:DocumentsService, private usersService:UsersService) {  }
+  roles = [];
+  accessTables = [];
+  access:any = {};
+  constructor(private documentsService:DocumentsService, private usersService:UsersService) { 
+    this.roles = [{name:"WRITE", value:"WRITE"},{name:"READ", value:"READ"}];
+   }
 
   ngOnInit() {
     this.list();
@@ -30,6 +36,9 @@ export class DocumentsComponent implements OnInit {
         this.msgs.push({severity:'error', summary:'Error Message', detail:error.error.message});
       }
     );
+  }
+  add(){
+    console.log(this.access);
   }
   list(){
     this.documentsService.list().subscribe((data)=>{

@@ -13,13 +13,7 @@ export class DocumentsComponent implements OnInit {
   documents = [];
   users = [];
   msgs = [];
-  roles:SelectItem[];
-  login;
-  role;
-  access = [];
-  constructor(private documentsService:DocumentsService, private usersService:UsersService) {
-    this.roles = [ {label:'WRITE', value:'W'}, {label:'READ', value:'R'}]
-   }
+  constructor(private documentsService:DocumentsService, private usersService:UsersService) {  }
 
   ngOnInit() {
     this.list();
@@ -37,7 +31,6 @@ export class DocumentsComponent implements OnInit {
       }
     );
   }
-
   list(){
     this.documentsService.list().subscribe((data)=>{
       this.documents = data;

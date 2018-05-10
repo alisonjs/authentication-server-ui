@@ -10,16 +10,6 @@
         <textarea pInputTextarea name="description" ngModel [required]="true"></textarea>
     </div>
     <div class="ui-g-12">
-      <div class="ui-g">
-        <div class="ui-g-12 ui-md-6 ui-lg-4">
-            <p-autoComplete ngModel name="login" [suggestions]="users" (completeMethod)="search($event)" [multiple]="true"></p-autoComplete>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-4">
-          <p-dropdown [options]="roles" ngModel name="role" optionLabel="role"></p-dropdown>
-        </div>
-      </div>
-    </div>
-    <div class="ui-g-12">
       <button pButton type="submit" label="Save" [disabled]="frm.invalid"></button>
     </div>
 

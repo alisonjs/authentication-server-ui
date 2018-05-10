@@ -3,6 +3,7 @@ import { DocumentsService } from '../documents.service';
 import { FormControl } from '@angular/forms';
 import { UsersService } from '../../users/users.service';
 import {SelectItem} from 'primeng/api';
+import { AccessTable } from '../../users/access-table';
 
 @Component({
   selector: 'app-documents',
@@ -15,8 +16,9 @@ export class DocumentsComponent implements OnInit {
   users = [];
   msgs = [];
   roles = [];
-  accessTables = [];
-  access:any = {};
+  tables = [];
+  user:any;
+  role:string;
   constructor(private documentsService:DocumentsService, private usersService:UsersService) { 
     this.roles = [{name:"WRITE", value:"WRITE"},{name:"READ", value:"READ"}];
    }
@@ -37,8 +39,15 @@ export class DocumentsComponent implements OnInit {
       }
     );
   }
-  add(){
-    console.log(this.access);
+  addRole(){
+    console.log(this.user);
+    console.log(this.role);
+    this.tables.push({user:this.user, role:this.role});
+
+    console.log(this.tables);
+  }
+  deleteRole(index:number){
+    console.log(this.tables[index]);
   }
   list(){
     this.documentsService.list().subscribe((data)=>{
@@ -53,5 +62,8 @@ export class DocumentsComponent implements OnInit {
     this.usersService.get(event.query).subscribe((data)=>{
       this.users = data;
     });
+  }
+  deleteDocument(){
+    console.log("Delete document");
   }
 }

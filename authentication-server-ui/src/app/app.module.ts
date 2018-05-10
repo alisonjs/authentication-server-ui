@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import { DataTableModule, ButtonModule, InputTextModule, InputMaskModule, CalendarModule } from "primeng/primeng";
 import {PasswordModule} from 'primeng/password';
@@ -22,6 +23,7 @@ import { DocumentsComponent } from './documents/documents/documents.component';
 import { UsersService } from './users/users.service';
 import {DocumentsService} from './documents/documents.service';
 import { UsersComponent } from './users/users/users.component'
+import { AccessTable } from './users/access-table';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { UsersComponent } from './users/users/users.component'
     BrowserModule, RoutingModule,
 
     HttpClientModule,
+    HttpModule,
     BrowserAnimationsModule,
     FormsModule,
     
@@ -52,7 +55,7 @@ import { UsersComponent } from './users/users/users.component'
     AutoCompleteModule
 
   ],
-  providers: [UsersService, DocumentsService],
+  providers: [UsersService, DocumentsService, AccessTable],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

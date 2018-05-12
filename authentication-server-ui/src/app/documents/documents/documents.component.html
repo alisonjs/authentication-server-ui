@@ -3,12 +3,13 @@
       
       <div class="ui-g-7 ui-fluid">
           <label>Title</label>
-          <input pInputText name="name" ngModel [required]="true">
+          <input pInputText name="name" [(ngModel)]="document.name" [required]="true">
       </div>
       <div class="ui-g-7 ui-fluid">
         <label>Description</label>
-        <textarea pInputTextarea name="description" ngModel [required]="true"></textarea>
-        <input type="hidden" name="active" ngModel>
+        <textarea pInputTextarea name="description" [(ngModel)]="document.description" ngModel [required]="true"></textarea>
+        <input type="hidden" name="active" [(ngModel)]="document.active">
+        <input type="hidden" name="id" [(ngModel)]="document.id">
     </div>
     <div class="ui-g-12">
       <button pButton type="submit" label="Save" [disabled]="frm.invalid"></button>
@@ -26,8 +27,9 @@
       <p-column field="document.description" header="Description"></p-column>
       <p-column field="role" header="Role"></p-column>
       <p-column >
-          <ng-template let-doc="rowData" pTemplate="body">
-              <p-button icon="fa fa-fw fa-trash" (click)="deleteDocument(doc)"></p-button>
+          <ng-template let-doc="rowData" pTemplate="body">            
+              <button pButton  icon="fa fa-fw fa-pencil" (click)="edit(doc)" class="ui-button-warning"></button>
+              <button pButton  icon="fa fa-fw fa-trash" (click)="delete(doc)" class="ui-button-danger"></button>
           </ng-template>  
       </p-column>
     </p-dataTable>

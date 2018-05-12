@@ -24,6 +24,8 @@ import { UsersService } from './users/users.service';
 import {DocumentsService} from './documents/documents.service';
 import { UsersComponent } from './users/users/users.component'
 import { AccessTable } from './users/access-table';
+import { ControlAccessComponent } from './documents/control-access/control-access.component';
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { AccessTable } from './users/access-table';
     AppComponent,
     SignInComponent,
     DocumentsComponent,
-    UsersComponent
+    UsersComponent,
+    ControlAccessComponent
   ],
   imports: [
     BrowserModule, RoutingModule,
@@ -52,7 +55,8 @@ import { AccessTable } from './users/access-table';
     CardModule,
     InputTextareaModule,
     DropdownModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    DialogModule
 
   ],
   providers: [UsersService, DocumentsService, AccessTable],

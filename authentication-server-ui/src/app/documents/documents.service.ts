@@ -17,7 +17,10 @@ export class DocumentsService {
   }
 
   delete(document:any){
-    console.log(document.id);
     return this.http.delete(this.documents_url+"/document/"+document.id);
+  }
+
+  getDocument(document:any){
+    return this.http.get(this.documents_url+"/document/"+document.id);
   }
 }

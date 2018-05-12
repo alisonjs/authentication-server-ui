@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './users/sign-in/sign-in.component';
 import { DocumentsComponent } from './documents/documents/documents.component';
 import { UsersComponent } from './users/users/users.component';
+import { ControlAccessComponent } from './documents/control-access/control-access.component';
 
 const routes: Routes = [
     //home
@@ -21,6 +22,10 @@ const routes: Routes = [
     {
         path: 'documents',
         component: DocumentsComponent
+    },
+    {
+        path: 'roles',
+        component: ControlAccessComponent
     }
     ];
 

@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { UsersService } from '../../users/users.service';
 import {SelectItem} from 'primeng/api';
 import { AccessTable } from '../../users/access-table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -19,8 +20,11 @@ export class DocumentsComponent implements OnInit {
   tables = [];
   user:any;
   role:string;
-  constructor(private documentsService:DocumentsService, private usersService:UsersService) { 
+  document:any;
+  display: boolean = false;
+  constructor(private documentsService:DocumentsService, private usersService:UsersService, private router:Router) { 
     this.roles = [{name:"WRITE", value:"WRITE"},{name:"READ", value:"READ"}];
+    this.document = {};
    }
 
   ngOnInit() {
@@ -29,28 +33,18 @@ export class DocumentsComponent implements OnInit {
 
   save(form:FormControl){
     form.value.active = true;
-    console.log(form.value)
+    console.log(document);
     this.documentsService.save(form.value).subscribe(
       () => {
         form.reset();
         this.list();
+        this.display = false;
       },
       error=>{
         this.msgs = [];
         this.msgs.push({severity:'error', summary:'Error Message', detail:error.error.message});
       }
     );
-  }
-  addRole(){
-    console.log(this.user);
-    console.log(this.role);
-    this.tables.push({user:this.user, role:this.role});
-    for (let entry of this.tables) {
-      console.log(entry.user.login);
-    }
-  }
-  deleteRole(){
-    console.log(this.tables[0].user);
   }
   list(){
     this.documentsService.list().subscribe((data)=>{
@@ -66,11 +60,16 @@ export class DocumentsComponent implements OnInit {
       this.users = data;
     });
   }
-  deleteDocument(docment:any){
+  delete(docment:any){
     console.log("Delete document");
     console.log(docment);
     this.documentsService.delete(docment).subscribe((data)=>{
       this.list();
+    });
+  }
+  edit(doc:any){
+    this.documentsService.getDocument(doc.document).subscribe(data=>{
+      this.document=data;
     });
   }
 }

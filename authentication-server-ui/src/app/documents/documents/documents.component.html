@@ -8,31 +8,7 @@
       <div class="ui-g-7 ui-fluid">
         <label>Description</label>
         <textarea pInputTextarea name="description" ngModel [required]="true"></textarea>
-    </div>
-    
-    <div class="ui-g-12">
-      <div class="ui-g">
-        <div class="ui-g-12 ui-md-6 ui-lg-4">
-            <p-autoComplete [(ngModel)]="user" name="login" [suggestions]="users" (completeMethod)="search($event)" field="login" [size]="30" placeholder="Users" [minLength]="1"></p-autoComplete>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-4">
-            <p-dropdown [options]="roles" [(ngModel)]="role" name="role" placeholder="Select a Role" optionLabel="name" [showClear]="true"></p-dropdown>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-4">
-            <p-button icon="fa fa-fw fa-plus" (click)="addRole()" styleClass="ui-button-secondary" ></p-button>
-        </div>
-        <div class="ui-g-12">
-          <p-dataTable [value]="tables">
-            <p-column field="user.login" header="User"></p-column>
-            <p-column field="role.name" header="Role"></p-column>
-            <p-column field="role.name" header="Role">
-              <template>
-                <p-button icon="fa fa-fw fa-trash" (click)="deleteRole(rowIndex)"></p-button>    
-              </template>
-            </p-column>
-          </p-dataTable>
-        </div>
-      </div>
+        <input type="hidden" name="active" ngModel>
     </div>
     <div class="ui-g-12">
       <button pButton type="submit" label="Save" [disabled]="frm.invalid"></button>
@@ -49,10 +25,10 @@
       <p-column field="document.name" header="Title"></p-column>
       <p-column field="document.description" header="Description"></p-column>
       <p-column field="role" header="Role"></p-column>
-      <p-column field="role.name" header="Role">
-        <template>
-          <p-button icon="fa fa-fw fa-trash" (click)="deleteDocument(rowIndex)"></p-button>    
-        </template>
+      <p-column >
+          <ng-template let-doc="rowData" pTemplate="body">
+              <p-button icon="fa fa-fw fa-trash" (click)="deleteDocument(doc)"></p-button>
+          </ng-template>  
       </p-column>
     </p-dataTable>
   </div>

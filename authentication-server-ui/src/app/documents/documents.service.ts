@@ -15,4 +15,9 @@ export class DocumentsService {
     document.createdBy = this.usersService.getCurrentUser();
     return this.http.post(this.documents_url+"/document", document);
   }
+
+  delete(document:any){
+    console.log(document.id);
+    return this.http.delete(this.documents_url+"/document/"+document.id);
+  }
 }

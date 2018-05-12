@@ -28,6 +28,8 @@ export class DocumentsComponent implements OnInit {
   }
 
   save(form:FormControl){
+    form.value.active = true;
+    console.log(form.value)
     this.documentsService.save(form.value).subscribe(
       () => {
         form.reset();
@@ -43,11 +45,12 @@ export class DocumentsComponent implements OnInit {
     console.log(this.user);
     console.log(this.role);
     this.tables.push({user:this.user, role:this.role});
-
-    console.log(this.tables);
+    for (let entry of this.tables) {
+      console.log(entry.user.login);
+    }
   }
-  deleteRole(index:number){
-    console.log(this.tables[index]);
+  deleteRole(){
+    console.log(this.tables[0].user);
   }
   list(){
     this.documentsService.list().subscribe((data)=>{
@@ -63,7 +66,11 @@ export class DocumentsComponent implements OnInit {
       this.users = data;
     });
   }
-  deleteDocument(){
+  deleteDocument(docment:any){
     console.log("Delete document");
+    console.log(docment);
+    this.documentsService.delete(docment).subscribe((data)=>{
+      this.list();
+    });
   }
 }

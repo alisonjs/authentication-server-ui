@@ -17,18 +17,4 @@ export class ControlAccessComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  save(form:FormControl){
-    form.value.active = true;
-    console.log(document);
-    this.documentsService.save(form.value).subscribe(
-      () => {
-        form.reset();
-      },
-      error=>{
-        this.msgs = [];
-        this.msgs.push({severity:'error', summary:'Error Message', detail:error.error.message});
-      }
-    );
-  }
 }

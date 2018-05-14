@@ -26,6 +26,8 @@ import { UsersComponent } from './users/users/users.component'
 import { AccessTable } from './users/access-table';
 import { ControlAccessComponent } from './documents/control-access/control-access.component';
 import {DialogModule} from 'primeng/dialog';
+import { AccessControlTableService } from './documents/control-access/access-control-table.service';
+
 
 
 @NgModule({
@@ -59,7 +61,7 @@ import {DialogModule} from 'primeng/dialog';
     DialogModule
 
   ],
-  providers: [UsersService, DocumentsService, AccessTable],
+  providers: [UsersService, DocumentsService, AccessTable, AccessControlTableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

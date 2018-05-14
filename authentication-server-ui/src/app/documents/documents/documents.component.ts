@@ -5,6 +5,7 @@ import { UsersService } from '../../users/users.service';
 import {SelectItem} from 'primeng/api';
 import { AccessTable } from '../../users/access-table';
 import { Router } from '@angular/router';
+import { AccessControlTableService } from '../control-access/access-control-table.service';
 
 @Component({
   selector: 'app-documents',
@@ -22,7 +23,8 @@ export class DocumentsComponent implements OnInit {
   role:string;
   document:any;
   display: boolean = false;
-  constructor(private documentsService:DocumentsService, private usersService:UsersService, private router:Router) { 
+  constructor(private documentsService:DocumentsService, private usersService:UsersService, 
+    private router:Router, private accessControlService:AccessControlTableService) { 
     this.roles = [{name:"WRITE", value:"WRITE"},{name:"READ", value:"READ"}];
     this.document = {};
    }
@@ -70,6 +72,38 @@ export class DocumentsComponent implements OnInit {
   edit(doc:any){
     this.documentsService.getDocument(doc.document).subscribe(data=>{
       this.document=data;
+    });
+  }
+  show(doc:any){
+    this.display = true;
+    this.document = doc;
+    this.listUsersPermission();
+  }
+  close(){
+    this.display = false;
+    this.document = {};
+  }
+
+  addUser(){
+    var accessControlTable = {user:this.user, document:this.document, role:this.role};
+    this.accessControlService.save(accessControlTable).subscribe(()=>{
+      this.accessControlService.list(this.document).subscribe(data=>{
+        this.tables = data;
+      });
+    });
+  }
+
+  removeUser(accessControlTable:any){
+    this.accessControlService.delete(accessControlTable).subscribe(()=>{
+      this.accessControlService.list(this.document).subscribe(data=>{
+        this.tables = data;
+      });
+    })
+  }
+
+  listUsersPermission(){
+    this.accessControlService.list(this.document).subscribe(data=>{
+      this.tables = data;
     });
   }
 }

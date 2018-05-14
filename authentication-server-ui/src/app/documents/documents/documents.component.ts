@@ -6,6 +6,8 @@ import {SelectItem} from 'primeng/api';
 import { AccessTable } from '../../users/access-table';
 import { Router } from '@angular/router';
 import { AccessControlTableService } from '../control-access/access-control-table.service';
+import {Message} from 'primeng/components/common/api';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-documents',
@@ -15,16 +17,18 @@ import { AccessControlTableService } from '../control-access/access-control-tabl
 
 export class DocumentsComponent implements OnInit {
   documents = [];
+  msgsGrowl: Message[] = [];
   users = [];
   msgs = [];
   roles = [];
   tables = [];
   user:any;
-  role:string;
+  role:any;
   document:any;
   display: boolean = false;
   constructor(private documentsService:DocumentsService, private usersService:UsersService, 
-    private router:Router, private accessControlService:AccessControlTableService) { 
+    private router:Router, private accessControlService:AccessControlTableService,
+    private messageService: MessageService) { 
     this.roles = [{name:"WRITE", value:"WRITE"},{name:"READ", value:"READ"}];
     this.document = {};
    }
@@ -85,15 +89,21 @@ export class DocumentsComponent implements OnInit {
   }
 
   addUser(){
-    var accessControlTable = {user:this.user, document:this.document, role:this.role};
+    var accessControlTable = {user:this.user, document:this.document, role:this.role.name};
     this.accessControlService.save(accessControlTable).subscribe(()=>{
       this.accessControlService.list(this.document).subscribe(data=>{
         this.tables = data;
       });
+    },
+    error=>{
+      console.log(error.error.message);
+      this.msgsGrowl = [];
+      this.msgsGrowl.push({severity:'error', summary:'Error Message', detail:error.error.message});
     });
   }
 
   removeUser(accessControlTable:any){
+    console.log(accessControlTable);
     this.accessControlService.delete(accessControlTable).subscribe(()=>{
       this.accessControlService.list(this.document).subscribe(data=>{
         this.tables = data;

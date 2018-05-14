@@ -11,7 +11,7 @@ export class AccessControlTableService {
   }
 
   delete(acessControlTable:any){
-    return this.http.delete(this.access_url+"/access", acessControlTable);
+    return this.http.delete(this.access_url+"/access/"+acessControlTable.id);
   }
 
   list(document:any){

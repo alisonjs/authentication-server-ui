@@ -1,3 +1,4 @@
+<p-growl [(value)]="msgsGrowl"></p-growl>
 <form #frm="ngForm" (ngSubmit)="save(frm)">
   <div class="ui-g" >
       <div class="ui-g-7">
@@ -33,12 +34,14 @@
               <p-column field="document.name" header="Title"></p-column>
               <p-column field="document.description" header="Description"></p-column>
               <p-column field="role" header="Role"></p-column>
-              <p-column >
-                  <ng-template let-doc="rowData" pTemplate="body"  [ngIf]="role == 'WRITE'">
-                    <p-button title="Edit document" icon="fa fa-pencil" (click)="edit(doc)" styleClass=" ui-button-icon ui-button-warning"></p-button>
-                    <p-button title="Delete document" icon="fa fa-trash" (click)="delete(doc)" styleClass="ui-button-icon ui-button-danger"></p-button>
-                    <p-button title="Add user" icon="fa fa-user" (click)="show(doc)" styleClass="ui-button-icon"></p-button>
-                  </ng-template>  
+              <p-column>
+                  <ng-template let-doc="rowData" pTemplate="body">
+                    <ng-container *ngIf="doc.role === 'WRITE'" >
+                      <p-button title="Edit document" icon="fa fa-pencil" (click)="edit(doc)" styleClass=" ui-button-icon ui-button-warning"></p-button>
+                      <p-button title="Delete document" icon="fa fa-trash" (click)="delete(doc.document)" styleClass="ui-button-icon ui-button-danger"></p-button>
+                      <p-button title="Add user" icon="fa fa-user" (click)="show(doc.document)" styleClass="ui-button-icon"></p-button>
+                    </ng-container>
+                  </ng-template>
               </p-column>
             </p-dataTable>
           </div>
@@ -47,16 +50,16 @@
     </div>
 </div>
 
-<p-dialog header="Users' access" [(visible)]="display" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70">
+<p-dialog header="Users' access" [(visible)]="display" [modal]="true" [responsive]="true" [width]="460" [minWidth]="400" [minY]="70">
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-autoComplete [(ngModel)]="user" [suggestions]="users" (completeMethod)="search($event)"></p-autoComplete>
+        <p-autoComplete [(ngModel)]="user" field="login" name="login" placeholder="User" [suggestions]="users" (completeMethod)="search($event)"></p-autoComplete>
       </div>
       <div class="ui-g-12">
-        <p-dropdown [options]="roles" [(ngModel)]="role" placeholder="Select a Role" optionLabel="role" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="roles" [(ngModel)]="role" name="role" placeholder="Select a Role" optionLabel="name" [showClear]="true"></p-dropdown>
       </div>
       <div class="ui-g-12">
-        <p-button title="Add" icon="fa fa-add" (click)="addUser()" styleClass=" ui-button-icon"></p-button>
+        <p-button title="Add" icon="fa fa-plus" (click)="addUser()" styleClass=" ui-button-icon"></p-button>
       </div>
       <div class="ui-g-12">
         <p-card title="Users">
@@ -66,8 +69,8 @@
                   <p-column field="user.login" header="User"></p-column>
                   <p-column field="role" header="Role"></p-column>
                   <p-column >
-                    <ng-template let-table="rowData">
-                      <p-button title="Delete Acess" icon="fa fa-trash" (click)="removeUser(table)" styleClass="ui-button-icon ui-button-danger"></p-button>
+                    <ng-template let-table="rowData" pTemplate="body">
+                      <p-button title="Delete Access" icon="fa fa-trash" (click)="removeUser(table)" styleClass="ui-button-icon ui-button-danger"></p-button>
                     </ng-template>  
                 </p-column>
               </p-dataTable>
@@ -77,6 +80,6 @@
       </div> 
     </div>
   <p-footer>
-      <button type="button" pButton icon="fa-close" (click)="close()" label="No"></button>
+      <button type="button" pButton icon="fa-close" (click)="close()" label="Close"></button>
   </p-footer>
 </p-dialog>

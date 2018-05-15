@@ -38,9 +38,8 @@ export class DocumentsComponent implements OnInit {
   }
 
   save(form:FormControl){
-    form.value.active = true;
-    console.log(document);
-    this.documentsService.save(form.value).subscribe(
+    this.document.active = true;
+    this.documentsService.save(this.document).subscribe(
       () => {
         form.reset();
         this.list();

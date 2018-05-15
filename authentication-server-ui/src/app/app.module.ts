@@ -30,6 +30,8 @@ import {DialogModule} from 'primeng/dialog';
 import {AccessControlTableService } from './documents/control-access/access-control-table.service';
 import {Message} from 'primeng/components/common/api';
 import {MessageService} from 'primeng/components/common/messageservice';
+import { LogOutComponent } from './log-out/log-out.component';
+import {ToolbarModule} from 'primeng/toolbar';
 
 
 
@@ -39,7 +41,8 @@ import {MessageService} from 'primeng/components/common/messageservice';
     SignInComponent,
     DocumentsComponent,
     UsersComponent,
-    ControlAccessComponent
+    ControlAccessComponent,
+    LogOutComponent
   ],
   imports: [
     BrowserModule, RoutingModule,
@@ -62,7 +65,8 @@ import {MessageService} from 'primeng/components/common/messageservice';
     DropdownModule,
     AutoCompleteModule,
     DialogModule,
-    GrowlModule
+    GrowlModule,
+    ToolbarModule
 
   ],
   providers: [UsersService, DocumentsService, AccessTable, AccessControlTableService, MessageService],
